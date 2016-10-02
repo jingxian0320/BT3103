@@ -19,6 +19,10 @@ Template.home.helpers({
 
   latestNews: function() {
     return News.latest();
+  },
+
+  loginUser: function(){
+    return Meteor.userId()
   }
 
 });

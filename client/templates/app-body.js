@@ -9,12 +9,12 @@ Session.setDefault(MENU_KEY, false);
 
 // XXX: this work around until IR properly supports this
 //   IR refactor will include Location.back, which will ensure that initator is
-//   set 
+//   set
 var nextInitiator = null, initiator = null;
 Deps.autorun(function() {
   // add a dep
   Router.current();
-  
+
   initiator = nextInitiator;
   nextInitiator = null;
 });
@@ -27,7 +27,7 @@ Template.appBody.addNotification = function(notification) {
   Meteor.setTimeout(function() {
     notifications.remove(id);
   }, NOTIFICATION_TIMEOUT);
-} 
+}
 
 Meteor.startup(function () {
   // set up a swipe left / right handler
@@ -92,8 +92,8 @@ Template.appBody.onRendered(function() {
     insertElement: function(node, next) {
       $(node)
       .insertBefore(next)
-      .velocity("slideDown", { 
-        duration: ANIMATION_DURATION, 
+      .velocity("slideDown", {
+        duration: ANIMATION_DURATION,
         easing: [0.175, 0.885, 0.335, 1.05]
       });
     },
@@ -114,18 +114,22 @@ Template.appBody.helpers({
   menuOpen: function() {
     return Session.get(MENU_KEY) && 'menu-open';
   },
-  
+
   overlayOpen: function() {
     return Overlay.isOpen() ? 'overlay-open' : '';
   },
-  
+
   connected: function() {
     return Session.get(IGNORE_CONNECTION_ISSUE_KEY) ||
       Meteor.status().connected;
   },
-  
+
   notifications: function() {
     return notifications.find();
+  },
+
+  loginUser: function(){
+    return Meteor.userId();
   }
 });
 
@@ -138,13 +142,13 @@ Template.appBody.events({
 
   'click .js-back': function(event) {
     nextInitiator = 'back';
-    
+
     // XXX: set the back transition via Location.back() when IR 1.0 hits
     history.back();
     event.stopImmediatePropagation();
     event.preventDefault();
   },
-  
+
   'click a.js-open': function(event) {
     // On Cordova, open links in the system browser rather than In-App
     if (Meteor.isCordova) {
@@ -162,7 +166,7 @@ Template.appBody.events({
     nextInitiator = 'menu'
     Session.set(MENU_KEY, false);
   },
-  
+
   'click .js-notification-action': function() {
     if (_.isFunction(this.callback)) {
       this.callback();

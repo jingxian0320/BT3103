@@ -37,3 +37,6 @@ spacebars
 check
 standard-minifier-css
 standard-minifier-js
+accounts-password
+accounts-base
+accounts-ui
