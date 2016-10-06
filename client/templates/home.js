@@ -35,4 +35,14 @@ Template.home.events({
       return Overlay.open('authOverlay');
 
   },
+  'submit'(event) {
+    // Prevent default browser form submit
+    event.preventDefault();
+    // Get value from form element
+    var target = event.target;
+    var table_id = target.tableId.value;
+    if (! Meteor.userId())
+      return Overlay.open('authOverlay');
+    Meteor.call('createOrder', table_id);
+  }
 });
