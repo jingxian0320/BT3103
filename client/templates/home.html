@@ -1,8 +1,7 @@
 <template name="home">
   <div class="page home">
-
-    {{>nav title='Local Market' black=true}}
-
+    {{#if loginUser}}
+    {{>nav title='Welcome' black=true}}
     <div class="content-scrollable">
       <div class="bg-image home">
         <h1 class="title-home">
@@ -12,13 +11,13 @@
         Mon–Fri 9-6pm, Sat 10-5pm</span>
         <span class="arrow"></span>
       </div>
-
-      <!-- <div class="callout-news">
+<!--
+      <div class="callout-news">
         <span class="title-callout">News</span>
         {{latestNews.text}}
-      </div> -->
+      </div>
 
-      <!-- <h2 class="list-title">What's Cooking</h2>
+      <h2 class="list-title">What's Cooking</h2>
       <div class="list-subtitle">See what the community is cooking</div>
       <div class="list-activities">
         {{#each activities}}
@@ -32,20 +31,27 @@
       </div>
       <a href="{{pathFor 'feed'}}" class="btn-primary">See what's cooking</a> -->
 
-      <!-- <h2 class="list-title">Our Favorite Dishes</h2>
+      <h2 class="list-title">Our Favorite Dishes</h2>
       <div class="list-subtitle">Hand-picked by chefs</div>
       <div class="list-recipes">
         {{#each featuredRecipes}}
           {{> recipeItem recipe=this size='small'}}
         {{/each}}
-      </div> -->
+      </div>
 
-      <a href='#' class="signin btn-primary">Sign in</a>
+
+      <form>
+        Table No:<br>
+        <input type="text" name="tableId" ><br>
+        <input type="submit" value="Submit">
+      </form>
       <a href='#' class="signout btn-primary">Sign out</a>
 
     </div>
+    {{else}}
+    <a href='#' class="signin btn-primary">Sign in</a>
+    {{/if}}
   </div>
-  <div>
 
-  </div>
+
 </template>
