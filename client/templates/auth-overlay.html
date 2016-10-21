@@ -1,23 +1,13 @@
 <template name="authOverlay">
   <div class="overlay auth">
-    <!-- <a href="#" class="js-close-overlay overlay-dismiss"><span class="icon-cross"></span></a> -->
+    <a href="#" class="js-close-overlay overlay-dismiss"><span class="icon-cross"></span></a>
 
     <div class="wrapper-heading">
-      <!-- <div class="title-overlay">Sign In</div> -->
-      <!-- {{> loginButtons}}  -->
-      {{#if loginUser}}
-        <form class = 'table-id-form'>
-          <div class="container">
-            <input type="text" placeholder="Table ID" name="tableId" required>
-            <button class = "btn-primary" type="submit">Confirm</button>
-          </div>
-        </form>
-      {{else}}
-        {{> atForm}}
-      {{/if}}
+      <div class="title-overlay">Sign In</div>
+      {{> loginButtons}}
     </div>
 
-    <!-- <button class="js-signin btn-twitter">Sign In With Twitter</button> -->
+    <button class="js-signin btn-twitter">Sign In With Twitter</button>
 
   </div>
 </template>
