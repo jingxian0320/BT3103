@@ -96,6 +96,6 @@ Template.recipe.events({
     var qty = target.qty.value;
     if (! Meteor.userId())
       return Overlay.open('authOverlay');
-    Meteor.call('orderDish', this._id, qty);
+    Meteor.call('orderDish', this.name, qty);
   }
 });
