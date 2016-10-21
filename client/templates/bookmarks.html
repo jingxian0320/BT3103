@@ -1,19 +1,39 @@
 <template name="bookmarks">
   <div class="page bookmarks">
-    {{> nav title='Your Bookmarks' subtext=recipeCount}}
+    {{> nav title='Your Cart'}}
 
     <div class="content-scrollable">
       <div class="list-recipes">
-        {{#each this}}
-          {{> recipeItem recipe=this size='large'}}
-        {{else}}
-          <div class="wrapper-message">
-            <div class="title-message">No bookmarks yet</div>
-            <div class="subtitle-message">Tap <span class="icon-bookmark-hollow"></span> to bookmark your favorite recipes. <a href="{{pathFor 'home'}}">Return home</a></div>
-
-          </div>
-        {{/each}}
+      {{#each this}}
+        {{> dishCount recipe=this size='small'}}
+      {{else}}
+        <div class="wrapper-message">
+          <div class="title-message">No cart yet</div>
+          <div class="subtitle-message">Add your favorite dishes to the cart. <a href="{{pathFor 'home'}}">Return home</a></div>
+        </div>
+      {{/each}}
       </div>
     </div>
+
   </div>
+</template>
+
+<template name='dishCount'>
+  <div class="clearfix float-my-children">
+  <img style="display:block;width:150px;height:150px" src="{{recipeImage recipe=recipe size=size}}"/>
+   {{#with recipe}}
+    <div>{{dish_name}}</div><br/>
+    <div>{{price}}</div>
+    <br>
+    <div id="addsub">
+      Quantity
+      <button type="button" class="minus">-</button>
+      <span>{{qty}}</span>
+      <button type="button" class="plus">+</button>
+    </div>
+    <br>
+    <button class='delete'>Delete</button>
+   {{/with}}
+  </div>
+  <br>
 </template>
