@@ -1,13 +1,13 @@
 <template name="recipe">
 
   <div class="page recipe {{activeTabClass}}">
-    {{#nav title='Recipe' black=true back=true}}
-      {{#if bookmarked}}
+    {{#nav title='Dish' black=true back=true}}
+      <!-- {{#if bookmarked}}
         <a href="#" class="nav-item js-remove-bookmark bookmarked"><span class="icon-bookmark"></span></a>
       {{else}}
         <a href="#" class="nav-item js-add-bookmark"><span class="icon-bookmark-hollow"></span></a>
       {{/if}}
-      <a href="#" class="nav-item js-share"><span class="icon-camera"></span></a>
+      <a href="#" class="nav-item js-share"><span class="icon-camera"></span></a> -->
     {{/nav}}
 
     <div class="image-recipe" style="background-image: url('{{recipeImage recipe=this size='full'}}')"></div>
@@ -19,48 +19,21 @@
       </div>
 
       <div class="btns-group">
-        <a class="btn-secondary {{#if isActiveTab 'make'}}active{{/if}} {{#if isActiveTab 'recipe'}}no-state{{/if}} js-show-recipe">Order It</a>
-        <a class="btn-secondary {{#if isActiveTab 'feed'}}active{{/if}} {{#if isActiveTab 'recipe'}}no-state{{/if}} js-show-feed">Ordered by</a>
+        <a class="btn-primary {{#if isActiveTab 'make'}}active{{/if}} {{#if isActiveTab 'recipe'}}no-state{{/if}} js-show-recipe">Order It!</a>
+        <!-- <a class="btn-secondary {{#if isActiveTab 'make'}}active{{/if}} {{#if isActiveTab 'recipe'}}no-state{{/if}} js-show-recipe">Order It</a>
+        <a class="btn-secondary {{#if isActiveTab 'feed'}}active{{/if}} {{#if isActiveTab 'recipe'}}no-state{{/if}} js-show-feed">Ordered by</a> -->
       </div>
     </div>
 
 
     <div class="content-scrollable static-nav make-scrollable">
-      <a class="btn-tertiary js-share"><span class="icon-camera"></span> Share that you made this</a>
 
-      <h2 class="list-title">Ingredients</h2>
-      <ul class="list-ingredients">
-        {{#each ingredients}}
-          <li class="item-ingredient">{{this}}</li>
-        {{/each}}
-      </ul>
-
-      <h2 class="list-title">Directions</h2>
-      <ol class="list-directions">
-        {{#each directions}}
-          <li class="item-direction">
-            <span class="text">{{this}}</span>
-          </li>
-        {{/each}}
-          <li class="item-direction">
-          ...
-          </li>
-      </ol>
-      <a href="{{source.url}}" target="_blank" class="btn-primary js-open">See full recipe on {{source.name}}</a>
-    </div>
-
-    <div class="content-scrollable static-nav feed-scrollable">
-      <a class="btn-tertiary js-share"><span class="icon-camera"></span> Share that you made this</a>
-      <div class="list-activities">
-        {{#each activities}}
-          {{> activity}}
-        {{else}}
-          <div class="wrapper-message">
-            <div class="title-message">No feed activity yet</div>
-            <div class="subtitle-message">Be the first to share that you made this recipe. <a class="js-share">Share now</a></div>
-          </div>
-        {{/each}}
-      </div>
+      <h2 class="list-title">Unit Price: {{price}}</h2>
+      <form>
+        Qty:<br>
+        <input type="number" min = "0" name="qty" value = '1'>
+        <input type="submit" class="btn-primary js-open" value="Add to Cart">
+      </form>
     </div>
   </div>
 </template>
