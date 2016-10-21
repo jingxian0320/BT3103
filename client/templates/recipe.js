@@ -90,7 +90,7 @@ Template.recipe.events({
   },
   'submit'(event) {
     // Prevent default browser form submit
-    // event.preventDefault();
+    event.preventDefault();
     // Get value from form element
     var target = event.target;
     var qty = target.qty.value;

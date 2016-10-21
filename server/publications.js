@@ -1,6 +1,6 @@
-Meteor.publish('bookmarkCounts', function() {
-  return BookmarkCounts.find();
-});
+// Meteor.publish('bookmarkCounts', function() {
+//   return BookmarkCounts.find();
+// });
 
 Meteor.publish('tables', function() {
   return Tables.find();
@@ -30,7 +30,7 @@ Meteor.publish('OrderDetails', function() {
 Meteor.publish('recipe', function(name) {
   check(name, String);
   return [
-    BookmarkCounts.find({recipeName: name}),
+    //BookmarkCounts.find({recipeName: name}),
     Activities.find({recipeName: name})
   ];
 });
