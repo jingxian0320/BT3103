@@ -10,7 +10,6 @@ email
 http
 jquery-waypoints
 fastclick
-accounts-twitter
 service-configuration
 oauth1
 launch-screen
@@ -40,3 +39,4 @@ standard-minifier-js
 accounts-password
 accounts-base
 accounts-ui
+useraccounts:unstyled
