@@ -1,9 +1,6 @@
 var TAB_KEY = 'recipeShowTab';
 
 Template.recipe.onCreated(function() {
-  if (Router.current().params.activityId)
-    Template.recipe.setTab('feed');
-  else
     Template.recipe.setTab('recipe');
 });
 
@@ -56,29 +53,9 @@ Template.recipe.helpers({
 });
 
 Template.recipe.events({
-  'click .js-add-bookmark': function(event) {
-    event.preventDefault();
-
-    if (! Meteor.userId())
-      return Overlay.open('authOverlay');
-
-    Meteor.call('bookmarkRecipe', this.name);
-  },
-
-  'click .js-remove-bookmark': function(event) {
-    event.preventDefault();
-
-    Meteor.call('unbookmarkRecipe', this.name);
-  },
-
   'click .js-show-recipe': function(event) {
     event.stopPropagation();
     Template.recipe.setTab('make')
-  },
-
-  'click .js-show-feed': function(event) {
-    event.stopPropagation();
-    Template.recipe.setTab('feed')
   },
 
   'click .js-uncollapse': function() {
@@ -97,5 +74,6 @@ Template.recipe.events({
     if (! Meteor.userId())
       return Overlay.open('authOverlay');
     Meteor.call('orderDish', this.name, qty);
+    Template.recipe.setTab('recipe')
   }
 });

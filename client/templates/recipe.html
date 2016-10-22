@@ -27,12 +27,14 @@
 
 
     <div class="content-scrollable static-nav make-scrollable">
-
-      <h2 class="list-title">Unit Price: {{price}}</h2>
       <form>
-        Qty:<br>
-        <input type="number" min = "0" name="qty" value = '1'>
-        <input type="submit" class="btn-primary js-open" value="Add to Cart">
+        <div  class = "item-direction">
+          <div class = "item-information">
+            Unit Price: ${{price}}<br>
+            Quantity: <input type="number" min = "0" name="qty" value = '1'>
+          </div>
+          <button class='delete'>Add to Cart</button>
+        </div>
       </form>
     </div>
   </div>

@@ -22,18 +22,27 @@
 
 .delete{
   border-radius: 3em;
-  border: #eb5f3a 1px solid;
+  border: @color-primary 1px solid;
   background: transparent;
-  color: #eb5f3a;
+  color: @color-primary;
   cursor: pointer;
   float: none;
-  font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  //font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1;
   margin: 0;
   outline: none;
   padding: 10px 30px;
   transition: all 200ms ease-in;
+}
+
+.delete:hover {
+  background: @color-primary;
+  color: #fff;
+}
+
+.delete:active {
+  box-shadow: rgba(0,0,0,.3) 0 1px 3px 0 inset;
 }
 
 button {
