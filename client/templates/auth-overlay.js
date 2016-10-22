@@ -6,15 +6,32 @@
 //   redirect flow.
 Template.authOverlay.onCreated(function() {
   this.autorun(function() {
-    if (Meteor.userId() && Overlay.template() === 'authOverlay')
-      Overlay.close();
+    if (Meteor.user()){
+      if (Meteor.userId() && Meteor.user().current_order !== "" && Overlay.template() === 'authOverlay'){
+        Overlay.close();
+      }
+    }
   });
 });
 
-Template.authOverlay.events({
-  'click .js-signin': function() {
-    Meteor.loginWithTwitter({loginStyle: 'redirect'});
 
-  }
-
+Template.authOverlay.helpers({
+  loginUser: function(){
+    return Meteor.userId()
+  },
+  notLoginToTable: function(){
+    return (!Meteor.user().current_order)
+  },
 });
+
+Template.authOverlay.events({
+  'submit .table-id-form'(event) {
+    // Prevent default browser form submit
+    event.preventDefault();
+    // Get value from form element
+    var target = event.target;
+    var table_id = target.tableId.value;
+    Meteor.call('createOrder', table_id);
+    Overlay.close();
+  }
+})

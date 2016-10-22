@@ -30,14 +30,24 @@
   .wrapper-heading {
     .position(absolute, 45%);
     .transform(translate3d(0, -50%,0));
+    width: 100%;
     text-align: center;
     padding: 0 1.25rem;
   }
 
-  .title-overlay {
+  // .title-overlay {
+  //   .font-l2;
+  //   .type-bold;
+  //   color: @color-empty;
+  //   line-height: 1;
+  //   margin-bottom: .5rem;
+  // }
+  .at-title {
     .font-l2;
+    .title-caps;
     .type-bold;
-    color: @color-full;
+    font-size: 150%;
+    color: @color-empty;
     line-height: 1;
     margin-bottom: .5rem;
   }
@@ -48,7 +58,64 @@
     color: @color-well;
   }
 
+  .at-pwd-form {
+    width: 100%;
+    margin: 0 auto;
+  }
 
-  .btn-primary,
-  .btn-twitter { .position(absolute, auto, 0, 0, 0, 100%); }
+  input{
+    text-align: left;
+    font-size: 120%;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-bottom: 2px solid white;
+    //display: inline-block;
+    //border: 1px solid #ccc;
+    //box-sizing: border-box;
+    background: transparent;
+    border: none;
+    color: @color-empty;
+  }
+  .at-btn {
+    // Sizing
+    .font-s2;
+    line-height: 22px !important; //override line-height always so we can use em's to size.
+    padding: 1.2em 1.25em .95em; // 48px tall
+
+    // Style
+    .type-black;
+    .title-caps;
+    .transition( all 200ms ease-in );
+    color: @color-empty;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    text-decoration: none !important; //prevents global link styles from applying
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: @color-primary;
+    color: @color-empty;
+    margin-top: 20px;
+    &:hover { background-color: darken(@color-primary, 5%); }
+    &:active { box-shadow: rgba(0,0,0,.3) 0 1px 3px 0 inset; }
+  }
+  .at-signin-link{
+    font-size: 110%;
+    margin-top: 20px;
+    color: @color-empty;
+  }
+  .at-signup-link{
+    font-size: 110%;
+    margin-top: 20px;
+    color: @color-empty;
+  }
+  .at-error{
+    font-size: 110%;
+    margin-top: 20px;
+    color: @color-empty;
+  }
+  .at-link{
+    .type-bold;
+  }
 }
