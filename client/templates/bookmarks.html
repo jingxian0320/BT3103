@@ -20,20 +20,22 @@
 
 <template name='dishCount'>
   <div class="clearfix float-my-children">
-  <img style="display:block;width:150px;height:150px" src="{{recipeImage recipe=recipe size=size}}"/>
-   {{#with recipe}}
-    <div>{{dish_name}}</div><br/>
-    <div>{{price}}</div>
-    <br>
-    <div id="addsub">
-      Quantity
-      <button type="button" class="minus">-</button>
-      <span>{{qty}}</span>
-      <button type="button" class="plus">+</button>
+    <img style="display:block;width:160px;height:130px" src="{{recipeImage recipe=recipe size=size}}"/>
+    {{#with recipe}}
+    <div class='cartDetail'>
+      <div style="font-size:17px;font-weight:600">{{dish_name}}</div>
+      <div style="color:#D83E14;font-size:17px">${{price}}</div>
+      <br>
+
+      <div id="addsub" style="text-align:right">
+        Quantity:
+        <button class="minus qtyChange">-</button>
+        <span>{{qty}}</span>
+        <button class="plus qtyChange">+</button>
+      </div>
+      <button class='delete' style="float:right">Delete</button>
     </div>
-    <br>
-    <button class='delete'>Delete</button>
-   {{/with}}
+    {{/with}}
   </div>
   <br>
 </template>
