@@ -167,6 +167,10 @@ Template.appBody.events({
     Session.set(MENU_KEY, false);
   },
 
+  'click .signout': function() {
+    Meteor.logout()
+  },
+  
   'click .js-notification-action': function() {
     if (_.isFunction(this.callback)) {
       this.callback();
