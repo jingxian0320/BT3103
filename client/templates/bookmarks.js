@@ -14,4 +14,10 @@ Template.bookmarks.events({
       Meteor.call('subtractQuantity',this.name);
     }
   }
+}),
+
+Template.bookmarks.helpers({
+  checkCount: function(recipe_list){
+    return recipe_list.length > 0;
+  }
 })
