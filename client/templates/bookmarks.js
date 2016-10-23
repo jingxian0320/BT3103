@@ -13,6 +13,10 @@ Template.bookmarks.events({
     } else{
       Meteor.call('subtractQuantity',this.name);
     }
+  },
+
+  'click .confirm': function(){
+    Meteor.call('confirmCart');
   }
 }),
 
