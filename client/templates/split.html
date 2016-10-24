@@ -1,11 +1,11 @@
 <template name="feed">
   <div class="page bookmarks">
-    {{> nav title='Your Cart'}}
+    {{> nav title='Bill Split'}}
 
     <div class="content-scrollable">
       <div class="list-recipes">
       {{#each this}}
-        {{> dishCount recipe=this size='small'}}
+        {{> dishCount_split recipe=this size='small'}}
       {{else}}
         <div class="wrapper-message">
           <div class="title-message">No cart yet</div>
@@ -15,7 +15,7 @@
       </div>
       {{#if checkCount this}}
         <div class="btns-group cart-confirm">
-          <a class="btn-primary confirm">Confirm</a>
+          <a class="btn-primary confirm">Done</a>
         </div>
       {{/if}}
     </div>
@@ -33,14 +33,37 @@
       <br>
 
       <div id="addsub" style="text-align:right">
-        Quantity:
-        <button class="minus qtyChange">-</button>
-        <span>{{qty}}</span>
-        <button class="plus qtyChange">+</button>
-      </div>
-      <button class='delete' style="float:right">Delete</button>
+        Share with:
+<!--         <button class="minus qtyChange">-</button>
+ -->        <span>{{recipe}} {{num_share}} others</span>
+<!--         <button class="plus qtyChange">+</button>
+ -->      </div>
+      <button class='delete' style="float:right">Split</button>
     </div>
     {{/with}}
   </div>
   <br>
 </template>
+
+<template name='sharer'>
+  <div class="clearfix float-my-children">
+    <img style="display:block;width:160px;height:130px" src="{{recipeImage recipe=recipe size=size}}"/>
+    {{#with recipe}}
+    <div class='cartDetail'>
+      <div style="font-size:17px;font-weight:600">{{dish_name}}</div>
+      <div style="color:#D83E14;font-size:17px">${{price}}</div>
+      <br>
+
+      <div id="addsub" style="text-align:right">
+        Share with:
+<!--         <button class="minus qtyChange">-</button>
+ -->        <span>{{qty}} others</span>
+<!--         <button class="plus qtyChange">+</button>
+ -->      </div>
+      <button class='delete' style="float:right">Split</button>
+    </div>
+    {{/with}}
+  </div>
+  <br>
+</template>
+

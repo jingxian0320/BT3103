@@ -1,6 +1,7 @@
 Template.feed.events({
   'click .delete': function(){
-    Meteor.call('deleteDish', this.name);
+    // Meteor.call('deleteDish', this.name);
+    Session.set('split',true)
   },
 
   'click .plus': function(){
@@ -23,5 +24,8 @@ Template.feed.events({
 Template.feed.helpers({
   checkCount: function(recipe_list){
     return recipe_list.length > 0;
+  },
+  checkSplit: function() {
+    return Session.get('split');
   }
 })
