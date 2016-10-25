@@ -1,3 +1,43 @@
 .page.bookmarks {
   .content-scrollable { padding-top: 3em; }
+  .content-scrollable {
+  	&.make-scrollable {
+      .transform(translate3d(0,100%,0));
+      .transition( all @transition-time @easing );
+      .backface-visibility(hidden);
+	  	height: 100%;
+	    top: 0%;
+	    position: relative;
+  		&.active {
+  			.transform(translate3d(0,0,0));
+  		}
+
+      .users-list {
+        padding: 1em;
+        .name {
+          border-bottom: 1px solid #f1f1f1;
+          cursor: pointer;
+          padding: .5em 0;
+          position: relative;
+          overflow: hidden;
+          transition: background 300ms ease-out;
+          border-left: 4px solid white;
+          font-size: 1.25em;
+          font-weight: 300;
+          line-height: 3em;
+          padding: 0 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          &:hover {
+            background-color: rgba(193,55,18,0.1);
+          }
+          &.selected {
+            background-color: rgba(193,55,18,0.1);
+            border-left: #c13712 4px solid;
+          }
+        }
+      }
+  	}
+  }
 }

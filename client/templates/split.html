@@ -1,11 +1,10 @@
 <template name="feed">
   <div class="page bookmarks">
-    {{> nav title='Your Cart'}}
-
+    {{> nav title='Order'}}
     <div class="content-scrollable">
       <div class="list-recipes">
       {{#each this}}
-        {{> dishCount recipe=this size='small'}}
+        {{> dishCount_split recipe=this size='small'}}
       {{else}}
         <div class="wrapper-message">
           <div class="title-message">No cart yet</div>
@@ -15,11 +14,13 @@
       </div>
       {{#if checkCount this}}
         <div class="btns-group cart-confirm">
-          <a class="btn-primary confirm">Confirm</a>
+          <a class="btn-primary save">Pay</a>
         </div>
       {{/if}}
     </div>
-
+    <div class="content-scrollable static-nav make-scrollable {{showUser}}">
+      {{> users}}
+    </div>
   </div>
 </template>
 
@@ -32,15 +33,30 @@
       <div style="color:#D83E14;font-size:17px">${{price}}</div>
       <br>
 
-      <div id="addsub" style="text-align:right">
+      <!-- <div id="addsub" style="text-align:right">
         Quantity:
         <button class="minus qtyChange">-</button>
         <span>{{qty}}</span>
         <button class="plus qtyChange">+</button>
-      </div>
-      <button class='delete' style="float:right">Delete</button>
+      </div> -->
+    <button class="delete js-share" style="float:right">Share</button>   
     </div>
     {{/with}}
   </div>
   <br>
+</template>
+<template name='users'>
+  <div class="users-list">
+    {{#if getOtherUsers}}
+      {{#each getOtherUsers}}
+        <div class="name {{selected}}">{{name}}</div>
+      {{/each}}
+    {{else}}
+    <div class="title-message">No other users</div>
+    {{/if}}
+  </div>
+  <div class="btns-group cart-confirm">
+    <a class="btn-primary js-cancel">Cancel</a>
+    <a class="btn-primary js-save">Save</a> 
+  </div>
 </template>
