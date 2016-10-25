@@ -1,4 +1,3 @@
-
 Template.feed.events({
   'click .js-share': function(){
     Session.set("selectedOrderDetail", this._id);
@@ -17,10 +16,6 @@ Template.feed.events({
 
   'click .share': function(){
     Meteor.call('getOtherUsers',this._id);
-  // },
-
-  // 'click .save': function(){
-  //   Meteor.call('confirmSplit', this._id, Session.get("selectedUser"));
   }
 }),
 
@@ -31,6 +26,26 @@ Template.feed.helpers({
   showUser: function(){
     var isShow = Session.get('showUser');
     return isShow ? 'active' : '';
+  },
+  showMessage: function(){
+    var shared = Session.get('shareUser');
+    var message = "";
+    console.log(message);
+    if (shared) {
+      message = "You shared this with " + shared.toString();
+      // for (i = 0; i < usr.length; ++i) {
+      //   if (i < usr.length - 1) {
+      //     message += " " + Users.findOne({"_id": usr[i]}).name +",";
+      //   }
+      //   else {
+      //     message += " and " + Users.findOne({"_id": usr[i]}).name;
+      //   }
+    }
+    else {
+      message = "You got this";
+    }
+    console.log(message);
+    return message;
   }
 }),
 
@@ -49,6 +64,7 @@ Template.users.helpers({
     }
   }
 }),
+
 Template.users.events({
   'click .name': function(){
     var userArr = Session.get("selectedUser") ? Session.get("selectedUser") : [];
@@ -72,5 +88,8 @@ Template.users.events({
     console.log(usr);
     console.log(or);
     Meteor.call('confirmSplit', or, usr);
+    Session.set("shareUser", usr);
+    Session.set('showUser', false);
+    Session.set("selectedUser", []);
   },
 })

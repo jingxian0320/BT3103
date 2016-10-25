@@ -1,5 +1,47 @@
 .page.bookmarks {
-  .content-scrollable { padding-top: 3em; }
+  overflow: hidden;
+  .content-scrollable { 
+    padding-top: 3em;
+    .order-detail {
+      .order-image{
+        width: 100px;
+        height: 100px;
+        display: block;
+      }
+      .cartDetail {
+        width: 255px;
+        height: 100px; 
+        position: relative; 
+        .order-name{
+          font-size: 17px;
+          font-weight: 600;
+          width: 195px;
+          display: inline-block;
+          float: left;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; 
+        }
+        .order-price{
+          color: #D83E14;
+          font-size: 17px;
+          width: 50px;
+          display: inline-block;
+          text-align: right;
+        }
+        .message{
+          padding-top: 10px;
+          font-style: italic;
+        }
+        .delete {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
+      }
+     
+    }
+  }
   .content-scrollable {
   	&.make-scrollable {
       .transform(translate3d(0,100%,0));
