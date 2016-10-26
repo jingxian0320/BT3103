@@ -11,7 +11,7 @@ Template.bookmarks.events({
     if (this.qty < 2) {
       $('.minus').disabled = true;
     } else{
-      Meteor.call('subtractQuantity',this.name);
+      Meteor.call('subtractQuantity',this.name, this.price);
     }
   },
 
