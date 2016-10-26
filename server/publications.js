@@ -36,13 +36,17 @@ Meteor.publish('recipe', function(name) {
 });
 
 // autopublish the user's information
+// Meteor.publish(null, function() {
+//   return Meteor.users.find(this.userId, {
+//     fields: {
+//       admin: 1,
+//       current_order: 1,
+//       current_order_details: 1,
+//       credits: 1,
+//     }
+//   });
+// })
+
 Meteor.publish(null, function() {
-  return Meteor.users.find(this.userId, {
-    fields: {
-      admin: 1,
-      current_order: 1,
-      current_order_details: 1,
-      credits: 1,
-    }
-  });
+  return Meteor.users.find();
 })

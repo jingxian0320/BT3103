@@ -6,6 +6,11 @@
       <div class="list-recipes">
       {{#each this}}
         {{> dishCount_split recipe=this size='small'}}
+        {{#if checkSplit this}}
+          {{#each getOtherUser}}
+            {{> sharer}}
+          {{/each}}
+        {{/if}}
       {{else}}
         <div class="wrapper-message">
           <div class="title-message">No cart yet</div>
@@ -35,10 +40,10 @@
       <div id="addsub" style="text-align:right">
         Share with:
 <!--         <button class="minus qtyChange">-</button>
- -->        <span>{{recipe}} {{num_share}} others</span>
+ -->        <span>{{num_share}} others</span>
 <!--         <button class="plus qtyChange">+</button>
  -->      </div>
-      <button class='delete' style="float:right">Split</button>
+      <button class='delete' style="float:right">{{#if checkSplit this}}Done{{else}}Split{{/if}}</button>
     </div>
     {{/with}}
   </div>
@@ -47,23 +52,11 @@
 
 <template name='sharer'>
   <div class="clearfix float-my-children">
-    <img style="display:block;width:160px;height:130px" src="{{recipeImage recipe=recipe size=size}}"/>
-    {{#with recipe}}
-    <div class='cartDetail'>
-      <div style="font-size:17px;font-weight:600">{{dish_name}}</div>
-      <div style="color:#D83E14;font-size:17px">${{price}}</div>
+<!--     <div class='cartDetail'>
+ -->      <div style="font-size:17px;font-weight:600">{{name}}</div>
+      <div style="color:#D83E14;font-size:17px">status add here</div>
       <br>
-
-      <div id="addsub" style="text-align:right">
-        Share with:
-<!--         <button class="minus qtyChange">-</button>
- -->        <span>{{qty}} others</span>
-<!--         <button class="plus qtyChange">+</button>
- -->      </div>
-      <button class='delete' style="float:right">Split</button>
-    </div>
-    {{/with}}
-  </div>
-  <br>
+<!--     </div>
+ -->  </div>
 </template>
 
