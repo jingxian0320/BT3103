@@ -1,6 +1,6 @@
 <template name="feed">
   <div class="page bookmarks">
-    {{> nav title='Order'}}
+    {{> nav title='Split'}}
     <div class="content-scrollable">
       <div class="list-recipes">
       {{#each this}}
@@ -14,7 +14,7 @@
       </div>
       {{#if checkCount this}}
         <div class="btns-group cart-confirm">
-          <a class="btn-primary save">Pay</a>
+          <a class="btn-primary confirm">Confirm</a>
         </div>
       {{/if}}
     </div>
@@ -32,14 +32,7 @@
       <div class="order-name">{{dish_name}}</div>
       <div class="order-price">${{price}}</div>
       <br>
-      <div class="message" id="addsub" style="text-align:left">
-        message here
-        <!-- {{> feed}} -->
-        <!-- {{showMessage}} -->
-<!--         <button class="minus qtyChange">-</button>
-        <span>{{qty}}</span>
-        <button class="plus qtyChange">+</button> -->
-      </div>
+      <div class="message" id="addsub" style="text-align:left">message here</div>
     <button class="delete js-share" style="float:right">Share</button>   
     </div>
     {{/with}}
@@ -47,6 +40,7 @@
   <br>
 </template>
 <template name='users'>
+ <div class="page recipe {{activeTabClass}}">
   <div class="users-list">
     {{#if getOtherUsers}}
       {{#each getOtherUsers}}
@@ -59,5 +53,6 @@
   <div class="btns-group cart-confirm">
     <a class="btn-primary js-cancel">Cancel</a>
     <a class="btn-primary js-save">Save</a> 
+  </div>
   </div>
 </template>

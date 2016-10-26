@@ -16,6 +16,9 @@ Template.feed.events({
 
   'click .share': function(){
     Meteor.call('getOtherUsers',this._id);
+  },
+  'click .confirm': function () {
+    
   }
 }),
 
@@ -67,6 +70,7 @@ Template.users.helpers({
 
 Template.users.events({
   'click .name': function(){
+    console.log("click.name" + this._id);
     var userArr = Session.get("selectedUser") ? Session.get("selectedUser") : [];
     if (userArr.indexOf(this._id) >= 0) {
       userArr.splice(userArr.indexOf(this._id),1);
