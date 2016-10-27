@@ -4,7 +4,7 @@
     <div class="content-scrollable">
       <div class="list-recipes">
       {{#each this}}
-        {{> dishCount_split recipe=this size='small'}}
+        {{> splitBill recipe=this size='small'}}
       {{else}}
         <div class="wrapper-message">
           <div class="title-message">No order yet</div>
@@ -14,7 +14,7 @@
       </div>
       {{#if checkCount this}}
         <div class="btns-group cart-confirm">
-          <a class="btn-primary confirm">Confirm</a>
+          <a class="btn-primary confirm" href="{{pathFor 'bill'}}">Confirm</a>
         </div>
       {{/if}}
     </div>
@@ -24,15 +24,17 @@
   </div>
 </template>
 
-<template name='dishCount_split'>
+<template name='splitBill'>
   <div class="clearfix float-my-children order-detail">
-    <img class="order-image" src="{{recipeImage recipe=recipe size=size}}"/>
     {{#with recipe}}
+      <img class="order-image" src="/img/recipes/320x350/{{recipeName}}.jpg"/>
     <div class='cartDetail'>
-      <div class="order-name">{{dish_name}}</div>
+      <div class="order-name">{{dishName}}</div>
       <div class="order-price">${{price}}</div>
       <br>
-      <div class="message" id="addsub" style="text-align:left">message here</div>
+      <div class="message" id="addsub" style="text-align:left">
+        {{viewUsers shared_customer}}
+      </div>
     <button class="delete js-share" style="float:right">Share</button>   
     </div>
     {{/with}}
@@ -44,10 +46,10 @@
   <div class="users-list">
     {{#if getOtherUsers}}
       {{#each getOtherUsers}}
-        <div class="name {{selected}}">{{name}}</div>
+        <div class="name {{selected}}">{{this}}</div>
       {{/each}}
     {{else}}
-    <div class="title-message">No other users</div>
+    <div class="subtitle-message">No other users</div>
     {{/if}}
   </div>
   <div class="btns-group cart-confirm">

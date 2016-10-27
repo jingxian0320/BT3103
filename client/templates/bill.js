@@ -1,4 +1,4 @@
-Template.feed.events({
+Template.bill.events({
   'click .js-share': function(){
     Session.set("selectedOrderDetail", this._id);
     Session.set("selectedUser", this.shared_customer);
@@ -19,7 +19,7 @@ Template.feed.events({
   }
 }),
 
-Template.feed.helpers({
+Template.bill.helpers({
   checkCount: function(recipe_list){
     return recipe_list.length > 0;
   },
