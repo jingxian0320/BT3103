@@ -1,7 +1,12 @@
 Template.feed.events({
   'click .js-share': function(){
     Session.set("selectedOrderDetail", this._id);
-    Session.set("selectedUser", this.shared_customer);
+    var sharedUsers = this.shared_customer;
+    var index = sharedUsers.indexOf(this.owner_customer);
+    if (index >=0) {
+      sharedUsers.splice(index,1)
+    }
+    Session.set("selectedUser", sharedUsers);
     Session.set('showUser', true);
     Meteor.call('getOtherUsers', 
         this._id, 
@@ -33,6 +38,10 @@ Template.feed.helpers({
 Template.users.helpers({
   getOtherUsers: function() {
     var users = Session.get('otherUsers');
+    var thisUserIndex = users.indexOf(this[0].owner_customer);
+    if(thisUserIndex >= 0) {
+      users.splice(thisUserIndex,1);
+    }
     return users;
   },
   selected: function() {
@@ -75,6 +84,10 @@ Template.users.events({
 }),
 Template.splitBill.helpers({
   viewUsers: function(arrUser) {
+    var thisUser = this.owner_customer;
+    if (arrUser.indexOf(thisUser) >= 0) {
+      arrUser.splice(arrUser.indexOf(thisUser),1);
+    }
     return arrUser.toString();
   }
 })

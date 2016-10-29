@@ -70,6 +70,10 @@ Template.bill.helpers({
 
 Template.payBill.helpers({
   viewUsers: function(arrUser) {
+    var thisUser = this.owner_customer;
+    if (arrUser.indexOf(thisUser) >= 0) {
+      arrUser.splice(arrUser.indexOf(thisUser),1);
+    }
     return arrUser.toString();
   }
 }),
