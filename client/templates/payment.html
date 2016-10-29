@@ -1,34 +1,37 @@
-<template name="feed">
+<template name="payment">
   <div class="page bookmarks">
-    {{> nav title='Bill Split'}}
+    {{> nav title='Payment'}}
 
     <div class="content-scrollable">
       <div class="list-recipes">
+      <div style="font-family: lora;font-size:17px;font-weight:600;text-align: center;padding-bottom: 1em;">Current Credits: ${{getCredits}}</div>
       {{#each this}}
-        {{> dishCount_split recipe=this size='small'}}
-        {{#if checkSplit this}}
-          {{#each getOtherUser}}
-            {{> sharer}}
-          {{/each}}
-        {{/if}}
+        {{> dishCount_payment recipe=this size='small'}}
       {{else}}
         <div class="wrapper-message">
-          <div class="title-message">No cart yet</div>
+          <div class="title-message">No bill yet</div>
           <div class="subtitle-message">Add your favorite dishes to the cart. <a href="{{pathFor 'home'}}">Return home</a></div>
         </div>
       {{/each}}
       </div>
-      {{#if checkCount this}}
+      {{#if checkPaymentStatus}}
+        <div style="font-family: lora;font-size:20px;font-weight:600;text-align: center;padding-bottom: 1em;">Current Credits: ${{getCredits}}</div>
         <div class="btns-group cart-confirm">
-          <a class="btn-primary confirm" href="{{pathFor 'payment'}}">Done</a>
+          <a class="btn-primary confirm" href="{{pathFor 'recipes'}}">Back to Home</a>
         </div>
+      {{else}}
+        <div style="font-family: lora;font-size:20px;font-weight:600;text-align: center">Total amount: ${{getTotalAmt}}</div>
+        <div class="btns-group cart-confirm">
+          <a class="btn-primary confirm">Confirm Payment</a>
+        </div>
+
       {{/if}}
     </div>
 
   </div>
 </template>
 
-<template name='dishCount_split'>
+<template name='dishCount_payment'>
   <div class="clearfix float-my-children">
     <img style="display:block;width:160px;height:130px" src="{{recipeImage recipe=recipe size=size}}"/>
     {{#with recipe}}
@@ -43,20 +46,12 @@
  -->        <span>{{num_share}} others</span>
 <!--         <button class="plus qtyChange">+</button>
  -->      </div>
-      <button class='delete' style="float:right">{{#if checkSplit this}}Done{{else}}Split{{/if}}</button>
+      <div class='delete' style="float:right">You pay: ${{amt_paid}}</div>
     </div>
     {{/with}}
   </div>
   <br>
 </template>
 
-<template name='sharer'>
-  <div class="clearfix float-my-children">
-<!--     <div class='cartDetail'>
- -->      <div style="font-size:17px;font-weight:600">{{email}}</div>
-      <div style="color:#D83E14;font-size:17px">add</div>
-      <br>
-<!--     </div>
- -->  </div>
-</template>
+
 

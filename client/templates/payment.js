@@ -1,8 +1,7 @@
-Template.feed.events({
+Template.payment.events({
   'click .delete': function(){
     // Meteor.call('deleteDish', this.name);
     var this_order_id_status = this.order_details_id;
-    console.log(this_order_id_status)
     Session.set("this_order_id", this.order_details_id);
     if (Session.get(this_order_id_status)) {
       Session.set(this_order_id_status,false)
@@ -28,11 +27,14 @@ Template.feed.events({
   },
 
   'click .confirm': function(){
-    Meteor.call('confirmCart');
+    console.log("click confirm")
+    var total = Session.get("total")
+    Meteor.call('confirmPayment', total);
+    Session.set('paid',true);
   }
 }),
 
-Template.feed.helpers({
+Template.payment.helpers({
   checkCount: function(recipe_list){
     return recipe_list.length > 0;
   },
@@ -54,39 +56,38 @@ Template.feed.helpers({
   },
   get_order_detail_id: function(input) {
     return input.order_details_id
+  },
+  getTotalAmt: function() {
+    var result = Meteor.call('getBill', function(error, result){if(error){alert('Error');}else{Session.set("total", result)}});
+    var b = Session.get("total")
+    // console.log("other_users" + JSON.stringify(a))
+    return b;
+  },
+  getCredits: function() {
+    var result = Meteor.call('getCredits', function(error, result){if(error){alert('Error');}else{Session.set("credits", result)}});
+    var c = Session.get("credits")
+    // console.log("other_users" + JSON.stringify(a))
+    return c;
+  },
+  checkPaymentStatus: function() {
+    return Session.get("paid")
   }
 
 })
 
-Template.dishCount_split.helpers({
+Template.dishCount_payment.helpers({
   this_order_id: function() {
     return Session.get("this_order_id");
   },
   checkSplit: function(this_set) {
     var od = this_set.order_details_id
     return Session.get(od)
-  }
-})
-
-Template.sharer.events({
-  'click': function(){
-    console.log("click")
-    var current_order_detail = Session.get("this_order_id");
-    var current_sharer = this;
-    Meteor.call('splitOrder',current_order_detail,current_sharer);
+  },
+  final_price: function() {
+    return 
   }
 })
 
 
-// Template.sharer.helpers({
-//   'getStatus': function(){
-//     console.log('status')
-//     var current_order_detail = Session.get("this_order_id");
-//     console.log(current_order_detail)
-//     var current_sharer = this;
-//     // var status = Meteor.call('getCustomerStatus', current_order_detail, current_sharer, function(error, result){if(error){alert('Error');}else{Session.set("status", result)}});
-//     // var a = Session.get("status")
-//     return 'test';
-//   }
-// })
+
 
