@@ -14,8 +14,9 @@ Template.feed.events({
           }
         });
   },
-  'click .confirm': function () {
-    
+  'click .js-confirm': function(event) {
+    Session.set("showNotification", false);
+    event.target.href = Router.path('bill');
   }
 }),
 
@@ -67,8 +68,6 @@ Template.users.events({
   'click .js-save': function(){
     var usr = Session.get("selectedUser");
     var or = Session.get("selectedOrderDetail");
-    console.log(usr);
-    console.log(or);
     Meteor.call('confirmSplit', or, usr);
     Session.set('showUser', false);
     Session.set("selectedUser", []);

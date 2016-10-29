@@ -1,7 +1,20 @@
 .page.bookmarks {
   overflow: hidden;
-  .content-scrollable { 
-    padding-top: 3em;
+  .content-scrollable.bill-scroll { 
+    padding-top: 17px;
+    padding-bottom: 47px;
+    top: 178px;
+    .total-price {
+      position: fixed;
+      left: 0;
+      background-color: #fff;
+      right: 0;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      top: 47px;
+      height: 132px;
+
+    }
     .order-detail {
       .order-image{
         width: 100px;
@@ -41,47 +54,48 @@
           right: 0;
         }
       }
-     
+    }
+  }
+  p.price-info {
+    color: #333;
+    .price-title {
+      display: inline-block;
+      width: 135px;
+      font-weight: bold;
+    }
+    .price-value {
+      display: inline-block;
+      min-width: 70px;
+      text-align: right;
+      white-space: nowrap;
+      &.total {
+        color: #d83e14;
+      }
+    }
+    input {
+      margin: 0;
+      color: #333;
+      text-align: right;
+      width: 50px;
+    }
+  }
+  .message {
+    margin-top: 10px;
+    p {
+      font-size: 16px;
+      line-height: 1.5;
     }
   }
   .content-scrollable {
-  	&.make-scrollable {
+    &.make-scrollable {
       .transform(translate3d(0,100%,0));
       .transition( all @transition-time @easing );
       .backface-visibility(hidden);
-	  	height: 100%;
-	    top: 0%;
-	    position: relative;
-  		&.active {
-  			.transform(translate3d(0,0,0));
-  		}
-
-      .users-list {
-        padding: 1em;
-        .name {
-          border-bottom: 1px solid #f1f1f1;
-          cursor: pointer;
-          padding: .5em 0;
-          position: relative;
-          overflow: hidden;
-          transition: background 300ms ease-out;
-          border-left: 4px solid white;
-          font-size: 1.25em;
-          font-weight: 300;
-          line-height: 3em;
-          padding: 0 10px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          &:hover {
-            background-color: rgba(193,55,18,0.1);
-          }
-          &.selected {
-            background-color: rgba(193,55,18,0.1);
-            border-left: #c13712 4px solid;
-          }
-        }
+      height: 100%;
+      position: relative;
+      &.active {
+        .transform(translate3d(0,0,0));
       }
-  	}
+    }
   }
 }

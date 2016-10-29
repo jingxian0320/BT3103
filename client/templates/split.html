@@ -12,12 +12,12 @@
         </div>
       {{/each}}
       </div>
+    </div>
       {{#if checkCount this}}
         <div class="btns-group cart-confirm">
-          <a class="btn-primary confirm" href="{{pathFor 'bill'}}">Confirm</a>
+          <a class="btn-primary confirm js-confirm">Confirm</a>
         </div>
       {{/if}}
-    </div>
     <div class="content-scrollable static-nav make-scrollable {{showUser}}">
       {{> users}}
     </div>
@@ -32,9 +32,11 @@
       <div class="order-name">{{dishName}}</div>
       <div class="order-price">${{price}}</div>
       <br>
+      {{#if viewUsers shared_customer}}
       <div class="message" id="addsub" style="text-align:left">
-        {{viewUsers shared_customer}}
+        You shared this with {{viewUsers shared_customer}}
       </div>
+      {{/if}}
     <button class="delete js-share" style="float:right">Share</button>   
     </div>
     {{/with}}

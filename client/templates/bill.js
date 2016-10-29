@@ -1,81 +1,107 @@
+Template.bill.rendered = function() {
+  var totalObj = Session.get("reciept") ? Session.get("reciept") : {};
+  totalObj.tips = 0.00;
+  Session.set("reciept", totalObj);
+},
+
 Template.bill.events({
-  'click .js-share': function(){
-    Session.set("selectedOrderDetail", this._id);
-    Session.set("selectedUser", this.shared_customer);
-    Session.set('showUser', true);
-    Meteor.call('getOtherUsers', 
-        this._id, 
-        function(error, result){
-          if(error){
-            alert('Error');
-          }
-          else{
-            Session.set("otherUsers", result);
-          }
-        });
+  'blur .js-tips': function (event) {
+    var tips = parseFloat(event.target.value)? parseFloat(event.target.value).toFixed(2) : 0.00;
+    event.target.value = tips;
+    // Session.set("tips", tips);
+    var totalObj = Session.get("reciept");
+    if(totalObj) {
+      totalObj.tips = tips;
+    }
+    Session.set("reciept", totalObj);
   },
-  'click .confirm': function () {
-    
+  'click .pay': function () {
+    Session.set("showNotification", true);
+    var totalObj = Session.get("reciept");
+    var total = 0.00;
+    if(totalObj) {
+      total = totalObj.total;
+    }
+    var userId = "";
+    if(this.length > 0) {
+      userId = this[0].owner_customer;
+    }
+    if(userId !== "") {
+      Meteor.call("payBill", userId, total,
+        function(error, result){
+            Session.set("noti", result);
+            if(result && result.paid) {
+              Session.set("reciept", 0.00);
+            }
+        });
+    }
   }
 }),
 
 Template.bill.helpers({
-  checkCount: function(recipe_list){
-    return recipe_list.length > 0;
+  getTotal: function(listSplit) {
+    var totalObj = Session.get("reciept");
+    if(!totalObj) {
+      totalObj = {
+        tips: 0.00
+      }
+    }
+    var subtotal = 0;
+    for (i in listSplit) {
+      subtotal += listSplit[i].sharedPrice;
+    }
+    subtotal = subtotal;
+    var gst = 0.07*subtotal;
+    var service = 0.1*subtotal;  
+    var tips = parseFloat(totalObj.tips);
+    var total = subtotal  + gst + service + tips;
+    totalObj.subtotal = parseFloat(subtotal).toFixed(2);
+    totalObj.gst = parseFloat(gst).toFixed(2);
+    totalObj.service = parseFloat(service).toFixed(2);
+    totalObj.total = parseFloat(total).toFixed(2);
+    Session.set("reciept", totalObj);
+    return totalObj;
   },
-  showUser: function(){
-    var isShow = Session.get('showUser');
-    return isShow ? 'active' : '';
+  showNotification: function() {
+    var notification = Session.get("showNotification");
+    return notification ? "active" : "";
   }
 }),
 
-Template.users.helpers({
-  getOtherUsers: function() {
-    var users = Session.get('otherUsers');
-    return users;
-  },
-  selected: function() {
-    var thisUser = this.toString();
-    var userArr = Session.get("selectedUser");
-    if (userArr.indexOf(thisUser) >= 0) {
-      return "selected";
-    }
-    else {
-      return '';
-    }
-  }
-}),
-
-Template.users.events({
-  'click .name': function(){
-    var thisUser = this.toString();
-    var userArr = Session.get("selectedUser") ? Session.get("selectedUser") : [];
-    if (userArr.indexOf(thisUser) >= 0) {
-      userArr.splice(userArr.indexOf(thisUser),1);
-    }
-    else {
-      userArr.push(thisUser);
-    }
-    Session.set("selectedUser", userArr);
-  },
-
-  'click .js-cancel': function(){
-    Session.set('showUser', false);
-    Session.set("selectedUser", []);
-  },
-
-  'click .js-save': function(){
-    var usr = Session.get("selectedUser");
-    var or = Session.get("selectedOrderDetail");
-    console.log(usr);
-    console.log(or);
-    Meteor.call('confirmSplit', or, usr);
-    Session.set('showUser', false);
-    Session.set("selectedUser", []);
-  },
-}),
-Template.splitBill.helpers({
+Template.payBill.helpers({
   viewUsers: function(arrUser) {
     return arrUser.toString();
+  }
+}),
+
+Template.billTotal.helpers({
+  getTips: function () {
+    var totalObj = Session.get("reciept");
+    var tips = 0.00;
+    if(totalObj && totalObj.tips) {
+      tips = totalObj.tips;
+    }
+    return tips;
+  }
+}),
+
+Template.notification.helpers({
+  getResult:function() {
+    var totalObj = Session.get("reciept");
+    return totalOj;
+  },
+  getNotification: function() {
+    var noti = Session.get('noti');
+    return noti;
+  }
+}),
+
+Template.notification.events({
+  'click .js-home': function(event) {
+    Session.set("showNotification", false);
+    event.target.href = Router.path('home');
+  },
+  'click .js-backToBill': function(event) {
+    Session.set("showNotification", false);
   }
 })
