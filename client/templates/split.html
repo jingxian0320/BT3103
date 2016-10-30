@@ -7,8 +7,8 @@
         {{> splitBill recipe=this size='small'}}
       {{else}}
         <div class="wrapper-message">
-          <div class="title-message">No order yet</div>
-          <div class="subtitle-message">Choose your favorite dishes. <a href="{{pathFor 'home'}}">Return home</a></div>
+          <div class="title-message">No order</div>
+          <div class="subtitle-message"> Check bill for shared dishes. <a href="{{pathFor 'bill'}}">View bill</a></div>
         </div>
       {{/each}}
       </div>

@@ -11,9 +11,12 @@
       {{/each}}
       </div>
     </div>
-    <div class="btns-group cart-confirm">
-      <a class="btn-primary pay">Pay</a>
-    </div>
+    {{#if checkCount this}}
+      <div class="btns-group cart-confirm">
+        <a class="btn-primary pay">Pay</a>
+      </div>
+    {{/if}}
+      
     <div class="content-scrollable static-nav make-scrollable {{showNotification}}">
       {{> notification}}
     </div>

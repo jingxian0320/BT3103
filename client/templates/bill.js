@@ -39,6 +39,9 @@ Template.bill.events({
 }),
 
 Template.bill.helpers({
+  checkCount: function(recipe_list){
+    return recipe_list.length > 0;
+  },
   getTotal: function(listSplit) {
     var totalObj = Session.get("reciept");
     if(!totalObj) {
