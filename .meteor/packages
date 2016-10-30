@@ -40,3 +40,5 @@ accounts-password
 accounts-base
 accounts-ui
 useraccounts:unstyled
+ecmascript
+reactive-var
