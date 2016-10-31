@@ -2,6 +2,8 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 var Highcharts = require('highcharts');
 require('highcharts/modules/exporting')(Highcharts);
+require('highcharts/modules/drilldown')(Highcharts);
+require('highcharts/modules/data')(Highcharts);
 
 Template.admin.helpers({
   isAdmin: function() {
