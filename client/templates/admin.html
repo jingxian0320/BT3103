@@ -7,7 +7,6 @@
         {{> chart}}
       {{else}}
         <h1 class="title-admin">Forbidden</h1>
-
       {{/if}}
     </div>
   </div>
@@ -20,7 +19,9 @@
       <OPTION VALUE="all">All Dishes</option>
       <OPTION VALUE="shared">Shared Dishes</option>
     </SELECT>*</h4>
-    <h4><small>*{{remarks}}</small></h4>
+    <small>*{{remarks}}</small>
   </div>
-  <div class="col-md-8" id="chartplace">{{createChart}}</div>
+  <br>
+  <!--div class="col-md-8" id="barchartplace">{{createChart}}</div-->
+  <div class="col-md-8" id="histogramplace">{{createHistogram}}</div>
 </template>
