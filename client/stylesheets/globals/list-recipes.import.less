@@ -1,3 +1,83 @@
+/* tell the container's children to float left: */
+.float-my-children > * {
+    float:left;
+    margin-right:10px;
+}
+
+/* this is called a clearfix. it makes sure that the container's children floats are cleared, without using extra markup */
+
+.clearfix {
+    *zoom:1 /* for IE */
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.delete{
+  border-radius: 3em;
+  border: @color-primary 1px solid;
+  background: transparent;
+  color: @color-primary;
+  cursor: pointer;
+  float: none;
+  //font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 0.8;
+  outline: none;
+  padding: 12px 28px;
+  transition: all 200ms ease-in;
+}
+
+.delete:hover {
+  background: @color-primary;
+  color: #fff;
+}
+
+.delete:active {
+  box-shadow: rgba(0,0,0,.3) 0 1px 3px 0 inset;
+}
+
+button {
+    margin: 4px;
+    cursor: pointer;
+}
+
+input {
+    text-align: center;
+    width: 40px;
+    margin: 4px;
+    color: @color-primary;
+}
+
+.cartDetail {
+  font-family: lora;
+  width:180px;
+  height: 130px;
+}
+
+.qtyChange {
+  background-color: transparent;
+  border: 1px solid @color-primary;
+  width:11.4px;
+}
+
+.item-direction {
+  font-family: lora;
+}
+
+.cart-confirm {
+  position: fixed;
+  right:    0;
+  bottom:   0;
+}
+
 .list-recipes { overflow: hidden; }
 
 .item-recipe {

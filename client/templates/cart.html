@@ -1,0 +1,46 @@
+<template name="bookmarks">
+  <div class="page bookmarks">
+    {{> nav title='Your Cart'}}
+
+    <div class="content-scrollable">
+      <div class="list-recipes">
+      {{#each this}}
+        {{> dishCount recipe=this size='small'}}
+      {{else}}
+        <div class="wrapper-message">
+          <div class="title-message">No cart yet</div>
+          <div class="subtitle-message">Add your favorite dishes to the cart. <a href="{{pathFor 'home'}}">Return home</a></div>
+        </div>
+      {{/each}}
+      </div>
+      {{#if checkCount this}}
+        <div class="btns-group cart-confirm">
+          <a class="btn-primary confirm">Confirm</a>
+        </div>
+      {{/if}}
+    </div>
+
+  </div>
+</template>
+
+<template name='dishCount'>
+  <div class="clearfix float-my-children">
+    <img style="display:block;width:160px;height:130px" src="{{recipeImage recipe=recipe size=size}}"/>
+    {{#with recipe}}
+    <div class='cartDetail'>
+      <div style="font-size:17px;font-weight:600">{{dish_name}}</div>
+      <div style="color:#D83E14;font-size:17px">${{price}}</div>
+      <br>
+
+      <div id="addsub" style="text-align:right">
+        Quantity:
+        <button class="minus qtyChange">-</button>
+        <span>{{qty}}</span>
+        <button class="plus qtyChange">+</button>
+      </div>
+      <button class='delete' style="float:right">Delete</button>
+    </div>
+    {{/with}}
+  </div>
+  <br>
+</template>

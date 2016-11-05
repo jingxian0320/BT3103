@@ -1,9 +1,6 @@
 var TAB_KEY = 'recipeShowTab';
 
 Template.recipe.onCreated(function() {
-  if (Router.current().params.activityId)
-    Template.recipe.setTab('feed');
-  else
     Template.recipe.setTab('recipe');
 });
 
@@ -32,7 +29,7 @@ Template.recipe.onRendered(function () {
 Template.recipe.setTab = function(tab) {
   var lastTab = Session.get(TAB_KEY);
   Session.set(TAB_KEY, tab);
-  
+
   var fromRecipe = (lastTab === 'recipe') && (tab !== 'recipe');
   $('.feed-scrollable').toggleClass('instant', fromRecipe);
 
@@ -56,36 +53,27 @@ Template.recipe.helpers({
 });
 
 Template.recipe.events({
-  'click .js-add-bookmark': function(event) {
-    event.preventDefault();
-
-    if (! Meteor.userId())
-      return Overlay.open('authOverlay');
-    
-    Meteor.call('bookmarkRecipe', this.name);
-  },
-
-  'click .js-remove-bookmark': function(event) {
-    event.preventDefault();
-
-    Meteor.call('unbookmarkRecipe', this.name);
-  },
-  
   'click .js-show-recipe': function(event) {
     event.stopPropagation();
     Template.recipe.setTab('make')
   },
-  
-  'click .js-show-feed': function(event) {
-    event.stopPropagation();
-    Template.recipe.setTab('feed')
-  },
-  
+
   'click .js-uncollapse': function() {
     Template.recipe.setTab('recipe')
   },
 
   'click .js-share': function() {
     Overlay.open('shareOverlay', this);
+  },
+  'submit'(event) {
+    // Prevent default browser form submit
+    event.preventDefault();
+    // Get value from form element
+    var target = event.target;
+    var qty = target.qty.value;
+    if (! Meteor.userId())
+      return Overlay.open('authOverlay');
+    Meteor.call('orderDish', this.name, this.price, qty);
+    Template.recipe.setTab('recipe')
   }
 });
