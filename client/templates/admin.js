@@ -311,6 +311,7 @@ Template.chart.events({
     //alert('f')
 
     var selVal = event.target.value;
+
     Session.set('option',selVal)
     if(selVal == "all" || selVal == '')
     {
@@ -325,6 +326,6 @@ Template.chart.events({
       optionsChart.series = [{name: 'Orders', data: [32, 25, 14, 5, 2]}];
 
     }
-    Highcharts.chart('chartplace',optionsChart);
+    Highcharts.chart('barchartplace',optionsChart);
   }
 });
