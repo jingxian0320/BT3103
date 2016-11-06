@@ -12,6 +12,14 @@ Template.home.helpers({
 
     return selection;
   },
+  credits: function(){
+    return Meteor.user().credits
+  },
+
+  table_id: function(){
+    var order = Orders.findOne(Meteor.user().current_order)
+    return order.table_id
+  },
 
   activities: function() {
     return Activities.latest();

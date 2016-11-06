@@ -28,8 +28,8 @@
       </div>
       <a href="{{pathFor 'feed'}}" class="btn-primary">See what's cooking</a> -->
 
-      <h2 class="list-title">Our Favorite Dishes</h2>
-      <div class="list-subtitle">Hand-picked by chefs</div>
+      <h2 class="list-title">Your Balance: {{credits}}</h2>
+      <div class="list-subtitle">You are seated on Table {{table_id}}</div>
       <div class="list-recipes">
         {{#each featuredRecipes}}
           {{> recipeItem recipe=this size='small'}}
