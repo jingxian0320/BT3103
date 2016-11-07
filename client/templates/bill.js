@@ -51,7 +51,7 @@ Template.bill.helpers({
     }
     var subtotal = 0;
     for (i in listSplit) {
-      subtotal += listSplit[i].sharedPrice;
+      subtotal += parseFloat(listSplit[i].sharedPrice);
     }
     subtotal = subtotal;
     var gst = 0.07*subtotal;
@@ -73,11 +73,17 @@ Template.bill.helpers({
 
 Template.payBill.helpers({
   viewUsers: function(arrUser) {
-    var thisUser = this.owner_customer;
+    var thisUser = Meteor.userId();
     if (arrUser.indexOf(thisUser) >= 0) {
       arrUser.splice(arrUser.indexOf(thisUser),1);
     }
-    return arrUser.toString();
+    var usrList = Meteor.users.find({
+      _id: {$in: arrUser}
+    }).fetch();
+    var sharedEmails = usrList.map(function(item){
+      return item.emails[0].address
+    });
+    return sharedEmails.toString();
   }
 }),
 
