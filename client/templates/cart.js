@@ -4,7 +4,7 @@ Template.bookmarks.events({
   },
 
   'click .plus': function(){
-    Meteor.call('addQuantity',this.name);
+    Meteor.call('addQuantity',this.name, this.price);
   },
 
   'click .minus': function(){

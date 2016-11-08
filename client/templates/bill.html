@@ -1,0 +1,100 @@
+<template name="bill">
+  <div class="page bookmarks">
+    {{> nav title='Bill' back=true}}
+    <div class="content-scrollable bill-scroll">
+      <div class="total-price">
+        {{> billTotal reciept=(getTotal this)}}
+      </div>
+      <div class="list-recipes">
+      {{#each this}}
+        {{> payBill recipe=this size='small'}}
+      {{/each}}
+      </div>
+    </div>
+    {{#if checkCount this}}
+      <div class="btns-group cart-confirm">
+        <a class="btn-primary pay">Pay</a>
+      </div>
+    {{/if}}
+      
+    <div class="content-scrollable static-nav make-scrollable {{showNotification}}">
+      {{> notification}}
+    </div>
+  </div>
+</template>
+
+<template name='payBill'>
+  <div class="clearfix float-my-children order-detail">
+    {{#with recipe}}
+      <img class="order-image" src="/img/recipes/320x350/{{recipeName}}.jpg"/>
+    <div class='cartDetail'>
+      <div class="order-name">{{dishName}}</div>
+      <div class="order-price">${{sharedPrice}}</div>
+      <br>
+      {{#if viewUsers shared_customer}}
+      <div class="message" id="addsub" style="text-align:left">
+        Shared with: {{viewUsers shared_customer}}
+      </div>
+      {{/if}}
+    </div>
+    {{/with}}
+  </div>
+  <br>
+</template>
+
+<template name="billTotal">
+      {{#with reciept}}
+        <p class="price-info">
+          <span class="price-title">Subtotal </span>: 
+          <span class="price-value">${{subtotal}}</span>
+        </p>
+        <p class="price-info">
+          <span class="price-title">GST (7%) </span>: 
+          <span class="price-value">${{gst}}</span>
+        </p>
+        <p class="price-info">
+          <span class="price-title">Service Charge (10%) </span>: 
+          <span class="price-value">${{service}}</span>
+        </p>
+        <p class="price-info">
+          <span class="price-title">Tips </span>: 
+          <span class="price-value">$<input class="js-tips" name="tips" value = '{{getTips}}'></span>
+        </p>
+        <p class="price-info">
+          <span class="price-title">Total </span>: 
+          <span class="price-value total">${{total}}</span>
+        </p>
+      {{/with}}
+</template>
+
+<template name="notification">
+  {{#if getNotification}}
+    {{#with getNotification}}
+      <p class="price-info">
+        <span class="price-title">Available Balance </span>: 
+        <span class="price-value">${{balance}}</span>
+      </p>
+      <p class="price-info">
+        <span class="price-title">Total Bill</span>: 
+        <span class="price-value">${{total}}</span>
+      </p>
+      {{#if paid}}
+        <p class="price-info">
+          <span class="price-title">Outstanding Balance</span>: 
+          <span class="price-value">${{outstanding}}</span>
+        </p>
+        <div class="btns-group cart-confirm">
+          <a class="btn-primary js-home">Home</a>
+        </div>
+      {{else}}
+        <div class="message">
+          <p>Not enough credits in your account.</p>
+          <p>Please top up or approach our staff.</p>
+        </div>
+        <div class="btns-group cart-confirm">
+        <a class="btn-primary js-backToBill">Back to bill</a>
+        </div>
+      {{/if}}
+    {{/with}}
+  {{/if}}
+</template>
