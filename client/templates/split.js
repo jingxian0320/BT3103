@@ -1,7 +1,10 @@
 Template.feed.events({
   'click .js-share': function(){
     Session.set("selectedOrderDetail", this._id);
-    var sharedUsersId = this.shared_customer;
+    var orderDetails = OrderDetails.find({
+      _id: this._id
+    }).fetch();
+    var sharedUsersId = orderDetails[0].shared_customer;
     var owner = this.owner_customer;
     Meteor.call('getOtherUsers', 
         this._id, 

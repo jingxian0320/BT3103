@@ -1,6 +1,6 @@
 <template name="bill">
   <div class="page bookmarks">
-    {{> nav title='Bill' back=true}}
+    {{> nav title='Bill'}}
     <div class="content-scrollable bill-scroll">
       <div class="total-price">
         {{> billTotal reciept=(getTotal this)}}
@@ -84,7 +84,7 @@
           <span class="price-value">${{outstanding}}</span>
         </p>
         <div class="btns-group cart-confirm">
-          <a class="btn-primary js-home">Home</a>
+          <a class="btn-primary js-home">Sign Out</a>
         </div>
       {{else}}
         <div class="message">
