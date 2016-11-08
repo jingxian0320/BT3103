@@ -1,5 +1,6 @@
 .page.bookmarks {
   overflow: hidden;
+  background-color: #fff;
   .content-scrollable.bill-scroll { 
     padding-top: 17px;
     padding-bottom: 47px;
@@ -14,6 +15,9 @@
       top: 47px;
       height: 132px;
       z-index: 1000;
+      &.hide {
+        display: none;
+      }
     }
     .order-detail {
       .order-image{
