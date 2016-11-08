@@ -13,7 +13,9 @@ Template.home.helpers({
     return selection;
   },
   credits: function(){
-    return Meteor.user().credits
+    var credit = Meteor.user().credits;
+    var credit = credit.toFixed(2);
+    return credit;
   },
 
   table_id: function(){
