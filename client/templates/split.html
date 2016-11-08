@@ -1,46 +1,62 @@
 <template name="feed">
   <div class="page bookmarks">
-    {{> nav title='Your Cart'}}
-
+    {{> nav title='Split'}}
     <div class="content-scrollable">
       <div class="list-recipes">
       {{#each this}}
-        {{> dishCount recipe=this size='small'}}
+        {{> splitBill recipe=this size='small'}}
       {{else}}
         <div class="wrapper-message">
-          <div class="title-message">No cart yet</div>
-          <div class="subtitle-message">Add your favorite dishes to the cart. <a href="{{pathFor 'home'}}">Return home</a></div>
+          <div class="title-message">No order</div>
+          <div class="subtitle-message"> Check bill for shared dishes. <a href="{{pathFor 'bill'}}">View bill</a></div>
         </div>
       {{/each}}
       </div>
+    </div>
       {{#if checkCount this}}
         <div class="btns-group cart-confirm">
-          <a class="btn-primary confirm">Confirm</a>
+          <a class="btn-primary confirm js-confirm">Confirm</a>
         </div>
       {{/if}}
+    <div class="content-scrollable static-nav make-scrollable {{showUser}}">
+      {{> users}}
     </div>
-
   </div>
 </template>
 
-<template name='dishCount_split'>
-  <div class="clearfix float-my-children">
-    <img style="display:block;width:160px;height:130px" src="{{recipeImage recipe=recipe size=size}}"/>
+<template name='splitBill'>
+  <div class="clearfix float-my-children order-detail">
     {{#with recipe}}
+      <img class="order-image" src="/img/recipes/320x350/{{recipeName}}.jpg"/>
     <div class='cartDetail'>
-      <div style="font-size:17px;font-weight:600">{{dish_name}}</div>
-      <div style="color:#D83E14;font-size:17px">${{price}}</div>
+      <div class="order-name">{{dishName}}</div>
+      <div class="order-price">${{price}}</div>
       <br>
-
-      <div id="addsub" style="text-align:right">
-        Quantity:
-        <button class="minus qtyChange">-</button>
-        <span>{{qty}}</span>
-        <button class="plus qtyChange">+</button>
+      {{#if viewUsers shared_customer}}
+      <div class="message" id="addsub" style="text-align:left">
+        Shared with: {{viewUsers shared_customer}}
       </div>
-      <button class='delete' style="float:right">Delete</button>
+      {{/if}}
+    <button class="delete js-share" style="float:right">Share</button>   
     </div>
     {{/with}}
   </div>
   <br>
+</template>
+<template name='users'>
+ <div class="page recipe {{activeTabClass}}">
+  <div class="users-list">
+    {{#if getOtherUsers}}
+      {{#each getOtherUsers}}
+        <div class="name {{selected}}">{{getEmail}}</div>
+      {{/each}}
+    {{else}}
+    <div class="subtitle-message">No other users</div>
+    {{/if}}
+  </div>
+  <div class="btns-group cart-confirm">
+    <a class="btn-primary js-cancel">Cancel</a>
+    <a class="btn-primary js-save">Save</a> 
+  </div>
+  </div>
 </template>
