@@ -25,9 +25,9 @@
 
 <template name='dishCount'>
   <div class="clearfix float-my-children">
-    <img style="display:block;width:160px;height:130px" src="{{recipeImage recipe=recipe size=size}}"/>
+    <img style="display:block;width:40%;height:130px" src="{{recipeImage recipe=recipe size=size}}"/>
     {{#with recipe}}
-    <div class='cartDetail'>
+    <div class='cartDetail' style="width:50%">
       <div style="font-size:17px;font-weight:600">{{dish_name}}</div>
       <div style="color:#D83E14;font-size:17px">${{price}}</div>
       <br>
