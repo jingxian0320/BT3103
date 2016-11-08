@@ -65,7 +65,12 @@ Template.bill.helpers({
   showNotification: function() {
     var notification = Session.get("showNotification");
     return notification ? "active" : "";
+  },
+  hideTotal: function() {
+    var notification = Session.get("showNotification");
+    return notification ? "hide" : "";
   }
+
 }),
 
 Template.payBill.helpers({

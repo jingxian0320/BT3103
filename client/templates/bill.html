@@ -2,7 +2,7 @@
   <div class="page bookmarks">
     {{> nav title='Bill'}}
     <div class="content-scrollable bill-scroll">
-      <div class="total-price">
+      <div class="total-price {{hideTotal}}">
         {{> billTotal reciept=(getTotal this)}}
       </div>
       <div class="list-recipes">
