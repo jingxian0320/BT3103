@@ -22,10 +22,7 @@ Template.bill.events({
     if(totalObj) {
       total = totalObj.total;
     }
-    var userId = "";
-    if(this.length > 0) {
-      userId = this[0].owner_customer;
-    }
+    var userId = Meteor.userId();
     if(userId !== "") {
       Meteor.call("payBill", userId, total,
         function(error, result){
@@ -112,6 +109,7 @@ Template.notification.helpers({
 Template.notification.events({
   'click .js-home': function(event) {
     Session.set("showNotification", false);
+    Meteor.logout();
     event.target.href = Router.path('home');
   },
   'click .js-backToBill': function(event) {
